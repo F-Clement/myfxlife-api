@@ -14,3 +14,14 @@ class ProfileList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    
+class ProfileDetail(generics.RetrieveUpdateAPIView):
+    """
+    Using generic views to get a single profile by its identity
+    and update it if user owns it.
+    """
+    serializer_class = ProfileSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Profile.objects.all()
+
