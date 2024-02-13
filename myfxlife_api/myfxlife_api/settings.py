@@ -36,7 +36,7 @@ SECRET_KEY = 'django-insecure-yewda^ipwagqr*p!o#pjnhzo+w!kqo1gof(^k1eo-+!tjv%^41
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['8000-fclement-myfxlifeapi-w1zypjh62tc.ws-eu108.gitpod.io']
 
 
 # Application definition
@@ -49,7 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'cloudinary_storage',
     'django.contrib.staticfiles',
-    'cloudinary'
+    'cloudinary',
+
+    'profiles',
 ]
 
 MIDDLEWARE = [
