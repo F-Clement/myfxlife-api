@@ -1,27 +1,23 @@
-from rest_framework import generics, permissions
+from rest_framework import generics
 from myfxlife_api.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
 
-
-class ProfileList(generics.ListCreateAPIView):
-    """
-    Using generic views to create to achieve get and post functionality
-    """
+"""
+Using generic views to create to achieve get and post functionality
+"""
+class ProfileList(generics.ListAPIView):
     serializer_class = ProfileSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Profile.objects.all()
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
 
-    
+
+"""
+Using generic views to get a single profile by its identity
+and update it if user owns it.
+"""  
 class ProfileDetail(generics.RetrieveUpdateAPIView):
-    """
-    Using generic views to get a single profile by its identity
-    and update it if user owns it.
-    """
     serializer_class = ProfileSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.all()
 
