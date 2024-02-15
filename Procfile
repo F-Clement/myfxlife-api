@@ -1,4 +1,2 @@
-web: gunicorn myfxlife_api.wsgi
-
 release: python manage.py makemigrations && python manage.py migrate
-web: gunicorn drf_api.wsgi
+web: gunicorn myfxlife_api.wsgi
