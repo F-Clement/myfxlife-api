@@ -64,7 +64,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['8000-fclement-myfxlifeapi-w1zypjh62tc.ws-eu108.gitpod.io', '127.0.0.1', 'myfxlife-api.herokuapp.com']
+ALLOWED_HOSTS = ['8000-fclement-myfxlifeapi-w1zypjh62tc.ws-eu108.gitpod.io', '127.0.0.1', 'myfxlife-api-ccff7c686884.herokuapp.com']
 
 
 # Application definition
@@ -86,7 +86,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'dj_rest_auth.registration',
     'dj_rest_auth.registration',
     'corsheaders',
 
