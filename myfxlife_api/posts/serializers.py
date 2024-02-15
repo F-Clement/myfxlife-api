@@ -2,6 +2,9 @@ from rest_framework import serializers
 from posts.models import Post
 from likes.models import Like
 
+# Serializing our posts resource so the api can be able to
+# post and get data in the required form.
+
 
 class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')

@@ -3,6 +3,9 @@ from .models import Profile
 from followers.models import Follower
 
 
+# Serializing our profile resource so the api can be able to
+# post and get data in the required form.
+
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()

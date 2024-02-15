@@ -6,7 +6,7 @@ from .models import Profile
 from .serializers import ProfileSerializer
 
 """
-Using generic views to create to achieve get and post functionality
+Using generic views to create List views for the Profile Model
 """
 class ProfileList(generics.ListAPIView):
     serializer_class = ProfileSerializer
@@ -34,8 +34,8 @@ class ProfileList(generics.ListAPIView):
 
 
 """
-Using generic views to get a single profile by its identity
-and update it if user owns it.
+Using generic views to create Retrieve and Update views for
+a singled out profile by id
 """  
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     serializer_class = ProfileSerializer
