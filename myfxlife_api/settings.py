@@ -66,8 +66,7 @@ DEBUG = 'DEV' in os.environ
 
 
 ALLOWED_HOSTS = [
-   os.environ.get('ALLOWED_HOST'),
-   '8000-fclement-myfxlifeapi-w1zypjh62tc.ws-eu108.gitpod.io', '127.0.0.1',
+   os.environ.get('ALLOWED_HOST'),'http://127.0.0.1:8000'
 ]
 
 # Application definition
@@ -117,7 +116,7 @@ if 'CLIENT_ORIGIN' in os.environ:
          os.environ.get('CLIENT_ORIGIN')
      ]
 if 'CLIENT_ORIGIN_DEV' in os.environ:
-    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', 'http://127.0.0.1:8000'), re.IGNORECASE).group(0)
+    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
     CORS_ALLOWED_ORIGIN_REGEXES = [
         rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
     ]
