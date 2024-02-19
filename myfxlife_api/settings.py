@@ -66,7 +66,7 @@ DEBUG = 'DEV' in os.environ
 
 
 ALLOWED_HOSTS = [
-   os.environ.get('ALLOWED_HOST'),'http://127.0.0.1:8000'
+   os.environ.get('ALLOWED_HOST'),'http://127.0.0.1:8000', '127.0.0.1'
 ]
 
 # Application definition
