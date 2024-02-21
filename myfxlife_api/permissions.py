@@ -20,6 +20,6 @@ class IsOwnerOrFollowerOnly(permissions.BasePermission):
 
 class AuthorOnly(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        if obj.author == request.user:
+        if obj.owner == request.user:
             return True
         return False
