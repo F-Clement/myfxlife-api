@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# A notification model to notify users each time a profile they follow
-# posts new content, a profile follows them, comments or likes a post they user owns.
+# A notification model to notify where a user can notify other users
+# following him.
 
 class Notification(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)

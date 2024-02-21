@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from notifications.models import Notification
 
 
 # A Post model describing how our posts will look like  
@@ -36,8 +34,3 @@ class Post(models.Model):
     def __str__(self):
         return f'{self.id} {self.title}'
     
-    def create_notification(sender, instance, created, **kwargs):
-        if created:
-            Notification.objects.create(owner=instance)
-
-    post_save.connect(create_notification, sender=User)
