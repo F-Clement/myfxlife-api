@@ -4,7 +4,7 @@ from .serializers import NotificationSerializer
 from .models import Notification
 from myfxlife_api.permissions import IsOwnerOrFollowerOnly
 
-
+# Restring notifications views only to owner and followers.
 
 class NotificationList(generics.ListCreateAPIView):
     serializer_class = NotificationSerializer
@@ -13,13 +13,6 @@ class NotificationList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-
-    # def get_queryset(self):
-    #     return (self.queryset.filter(owner=self.request.user))
-    
-    # def get_queryset(self):
-    #     if(self.request.user) in [owner.following]
-
 
 
 class NotificationDetail(generics.RetrieveDestroyAPIView):

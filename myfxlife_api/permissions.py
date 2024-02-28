@@ -13,7 +13,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
 class IsOwnerOrFollowerOnly(permissions.BasePermission):
   def has_object_permission(self, request, view, obj):
-    if request.user in obj.owner.following:
+    if request.user in obj.owner.following.all():
       return True
     return obj.owner == request.user
 
