@@ -1,110 +1,172 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+MYFXLIFE-API is a backend application built so support the needs of our frontend application (myfxlife). In this application a database is setup where users can upload information using the front end and it will be saved. Users will also be able to request data and it will be sent to them if they are authenticated to view or edit requested data. 
 
-Welcome Clement Fonyuy,
+## Entity Relationship Diagram
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+<img src="images/entityrelation.png">
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+## Project Goals
 
-## Gitpod Reminders
+### Owner Goals
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+1. Users should be able to have access to resources they request if they fulfill the permissions granted for the requested resources.
 
-`python3 -m http.server`
+2. If a user does not have permissions(maybe becaused he is not authenticated), then he can only have read access to some resources.
 
-A blue button should appear to click: _Make Public_,
 
-Another blue button should appear to click: _Open Browser_.
+### User Gaols
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+1. If a user is authenticated he should be able to have access to all resources except editing objects he does not own.
 
-A blue button should appear to click: _Make Public_,
+2. A user should be able get detail access to an object by using the object id.
 
-Another blue button should appear to click: _Open Browser_.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+## Security:
 
-To log into the Heroku toolbelt CLI:
+From the walkthrough project read access has been granted to unauthenticated users. I find this particularly not the best as other users data
+is being accessed by unknown users of the application. So I created two extra resourcesm(Drafts and Notifications) and granted only IsAuthenticated permissions. I think this is what should be done even for the other resources. But for the sake of the project I followed what was done in the walkthrough project.
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+## Resources and Permission Levels
 
-------
+<table>
+    <tr>
+        <th>Resource</th>
+        <th>Authenticated User</th>
+        <th>Unauthenticated User</th>
+    </tr>
+    <tr>
+        <td>Profiles</td>
+        <td>List all profiles and edit profile he/she owns</td>
+        <td>List all profiles but can not edit a profile</td>
+    </tr>
+    <tr>
+        <td>Posts</td>
+        <td>Create and List all posts and edit posts he/she owns</td>
+        <td>List all posts but can not edit a post</td>
+    </tr>
+    <tr>
+        <td>Comments</td>
+        <td>Comment on post, View all comments, delete and edit comments </td>
+        <td>View comments only</td>
+    </tr>
+    <tr>
+        <td>Follower</td>
+        <td>List followers and can follow</td>
+        <td>List followers but can not follow</td>
+    </tr>
+    <tr>
+        <td>Likes</td>
+        <td>List all likes, create and delete likes</td>
+        <td>List likes but cannot create like</td>
+    </tr>
+    <tr>
+        <td>Draft</td>
+        <td>Can view drafts he owns but not drafts of other users</td>
+        <td>Can not view any draft</td>
+    </tr>
+    <tr>
+        <td>Notfications</td>
+        <td>Can view notifications he owns but not that of thers except he is following their profiles</td>
+        <td>Can not view any notification</td>
+    </tr>
+</table>
 
-## Release History
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+<strong>Drafts are so that users could make as many post as they want but not publish immediately. Notifications were intended to make users send particular information only to users following them.</strong>
 
-**September 20 2023:** Update Python version to 3.9.17.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+## Testing
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+<table>
+    <tr>
+        <th>Activity</th>
+        <th>Expected Results</th>
+        <th>Atual Results</th>
+    </tr>
+    <tr>
+        <td>View Profile user owns by its id</td>
+        <td>Form to edit profile is displayed</td>
+        <td>Pass</td>
+    </tr>
+    <tr>
+        <td>View Profile user does not own by its id</td>
+        <td>Form to edit profile is not displayed and user can edit profile</td>
+        <td>Pass</td>
+    </tr>
+    <tr>
+        <td>View a post user owns by id</td>
+        <td>Form to edit post is displayed and user can edit the post</td>
+        <td>Pass</td>
+    </tr>
+    <tr>
+        <td>View a post user does not own by it id</td>
+        <td>Form to edit post is not displayed does user can not edit the post</td>
+        <td>Pass</td>
+    </tr>
+    <tr>
+        <td>View a comment user owns by its id</td>
+        <td>Form to edit comment is displayed</td>
+        <td>Pass</td>
+    </tr>
+    <tr>
+        <td>View a comment user does not own by its id</td>
+        <td>Form to edit comment is not displayed</td>
+        <td>Pass</td>
+    </tr>
+    <tr>
+        <td>Login and input draft url</td>
+        <td>Owners drafts are listed</td>
+        <td>Pass</td>
+    </tr>
+    <tr>
+        <td>Logout and input drafts url</td>
+        <td>No drafts are listed</td>
+        <td>Pass</td>
+    </tr>
+</table>
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+## Deployment
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+This application was deployed on Heroku. Below are the steps taken to successfully deploy.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+1. Create a database with ElephantSQL. The process involves signing up and  login in to the website, then creating a "New Instance". Setup the Instance and then at the end we obtain a database URL.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+2. Install Database and psycopg2 in the application with command "pip3 install dj_database_url==0.5.0 psycopg2"
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+3. Add enviromental variables like the database url, our cloudinary url, and a secret key in the 'env.py' file import them into the settings file for security then setup the database. At the end you make the migrations and then migrate.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+4. Then again in the terminal we install gunicorn "pip3 install gunicorn django-cors-headers" and update requirements.txt file.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+5. To be able to have the frontend and backend deployed in separate platforms we set JWT_AUTH_SAMESITE to None.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+6. To confirm are requirements file is up to date we run command "pip freeze --local > requirements.txt" in the terminal and if all is good we commit and push to Github.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+7. Goto Heroku. In Heroku a new app was created, a region chosen and then under settings we add some config variables i.e Cloudinary URL, Database URL, Secret Key, Client Origin, Client Origin Dev, Allowed Host then also Set Disablecollecstatic to 1.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+8. After we head to deploy tab, connect the app to our github repository and deploy in main branch. The app was successfully deployed to heroku and live Link is: 
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+N.B. <p>This application does not automatically deploy so each time the developer makes changes they have to come and deploy manually.</p>
 
-------
+9. The app was successfully deployed to heroku and live Link is: <https://myfxlifeapi-66a11d885add.herokuapp.com/>
 
-## FAQ about the uptime script
 
-**Why have you added this script?**
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+## Credits
 
-**How will this affect me?**
+- Deployment
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+Thanks to Code Institute's Tutor support for assistance during deployment.
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+- Media
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+All images on the readme file itself are screenshots demonstrating different parts of the application. 
 
-**So….?**
+We created our entity relationship diagram using [Figma](https://www.figma.com/)
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+- Code
 
-**Can I opt out?**
+<p>Thanks to Code Institutes walkthrough project we got a lot of boiler plate code and used it to feet our requirements.</p>
+<p>Learned a lot from free content on the internet like [Stack Overflow](https://stackoverflow.com/) </p>
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
+Special thanks goes to my mentor, and thanks also to the Code Institute tutors and the CI Slack Channel for support.
