@@ -67,7 +67,7 @@ DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
    os.environ.get('ALLOWED_HOST'),'http://127.0.0.1:8000', '127.0.0.1',
-   '8000-fclement-myfxlifeapi-3goxg5sdi3n.ws-eu108.gitpod.io'
+   '8000-fclement-myfxlifeapi-3goxg5sdi3n.ws-eu108.gitpod.io' , 'https://8000-fclement-myfxlifeapi-q6brqyes4da.ws-eu110.gitpod.io'
 ]
 
 # Application definition
