@@ -9,6 +9,7 @@ from myfxlife_api.permissions import IsOwnerOrFollowerOnly
 class NotificationList(generics.ListCreateAPIView):
     serializer_class = NotificationSerializer
     permission_classes = [IsOwnerOrFollowerOnly, permissions.IsAuthenticated]
+    queryset = Notification.objects.all()
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -20,6 +21,7 @@ class NotificationList(generics.ListCreateAPIView):
 class NotificationDetail(generics.RetrieveDestroyAPIView):
     serializer_class = NotificationSerializer
     permission_classes = [IsOwnerOrFollowerOnly, permissions.IsAuthenticated]
+    queryset = Notification.objects.all()
 
     def get_queryset(self):
         return Notification.objects.filter(owner__followed__in=self.request.user.following.all())
