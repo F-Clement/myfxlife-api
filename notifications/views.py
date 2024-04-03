@@ -16,9 +16,6 @@ class NotificationList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return Notification.objects.filter(owner__followed__in=self.request.user.following.all())
-    
-    def get_queryset(self):
-        return (self.queryset.filter(owner=self.request.user))
 
 
 
@@ -27,8 +24,8 @@ class NotificationDetail(generics.RetrieveDestroyAPIView):
     permission_classes = [IsOwnerOrFollowerOnly, permissions.IsAuthenticated]
     queryset = Notification.objects.all()
 
-    def get_queryset(self):
-        return Notification.objects.filter(owner__followed__in=self.request.user.following.all())
+    # def get_queryset(self):
+    #     return Notification.objects.filter(owner__followed__in=self.request.user.following.all())
     
     def get_queryset(self):
         return (self.queryset.filter(owner=self.request.user))
