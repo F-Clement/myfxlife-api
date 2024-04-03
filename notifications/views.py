@@ -16,6 +16,10 @@ class NotificationList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return Notification.objects.filter(owner__followed__in=self.request.user.following.all())
+    
+    def get_queryset(self):
+        return (self.queryset.filter(owner=self.request.user))
+
 
 
 class NotificationDetail(generics.RetrieveDestroyAPIView):
@@ -25,3 +29,6 @@ class NotificationDetail(generics.RetrieveDestroyAPIView):
 
     def get_queryset(self):
         return Notification.objects.filter(owner__followed__in=self.request.user.following.all())
+    
+    def get_queryset(self):
+        return (self.queryset.filter(owner=self.request.user))
