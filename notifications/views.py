@@ -10,6 +10,9 @@ class NotificationList(generics.ListCreateAPIView):
     serializer_class = NotificationSerializer
     permission_classes = [IsOwnerOrFollowerOnly, permissions.IsAuthenticated]
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
     def get_queryset(self):
         return Notification.objects.filter(owner__followed__in=self.request.user.following.all())
 
@@ -17,7 +20,6 @@ class NotificationList(generics.ListCreateAPIView):
 class NotificationDetail(generics.RetrieveDestroyAPIView):
     serializer_class = NotificationSerializer
     permission_classes = [IsOwnerOrFollowerOnly, permissions.IsAuthenticated]
-
 
     def get_queryset(self):
         return Notification.objects.filter(owner__followed__in=self.request.user.following.all())
